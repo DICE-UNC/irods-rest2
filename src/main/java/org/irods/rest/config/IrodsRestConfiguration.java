@@ -28,7 +28,7 @@ public class IrodsRestConfiguration {
 	@Value("${irods.zone}")
 	private String irodsZone;
 
-	@Value("${irods.default.resource}")
+	@Value("${default.storage.resource}")
 	private String irodsDefaultResource;
 
 	@Value("${proxy.user}")

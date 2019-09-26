@@ -105,7 +105,12 @@ public class IrodsBasicAuthenticationFilter extends BasicAuthenticationFilter {
 		IRODSAccount irodsAccount;
 		AuthResponse authResponse = null;
 		try {
-			irodsAccount = RestAuthUtils.getIRODSAccountFromBasicAuthValues(auth, irodsRestConfiguration);
+			try {
+				irodsAccount = RestAuthUtils.getIRODSAccountFromBasicAuthValues(auth, irodsRestConfiguration);
+			} catch (IllegalArgumentException e) {
+				log.info("no basic auth creds found");
+				return null;
+			}
 			log.info("irods account for auth:{}", irodsAccount);
 
 			authResponse = irodsAccessObjectFactory.authenticateIRODSAccount(irodsAccount);

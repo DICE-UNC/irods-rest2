@@ -3,6 +3,7 @@
 **/nb-configuration.xml
 **/.springBeans
 **/testing.properties
+**/test.rest.properties
 **/*.eml
 **/Scripts
 .idea

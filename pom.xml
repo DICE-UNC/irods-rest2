@@ -268,12 +268,12 @@
 									append="true">
 									irods.host=${jargon.test.irods.host}
 									irods.port=${jargon.test.irods.port}
-									irods.zoneName=${jargon.test.irods.zone}
-									irods.admin.user=${jargon.test.irods.admin}
-									irods.admin.password=${jargon.test.irods.admin.password}
-									irods.auth.scheme=${drs.auth.scheme}
+									irods.zone=${jargon.test.irods.zone}
+									proxy.user=${jargon.test.irods.admin}
+									proxy.password=${jargon.test.irods.admin.password}
+									auth.type=${auth.scheme}
 									default.storage.resource=${jargon.test.irods.resource}
-									ssl.negotiation.policy=${drs.ssl.policy}
+									ssl.negotiation.policy=${ssl.negotiation.policy}
 									shared.jwt.key=${shared.jwt.key}
 									jwt.algo=${jwt.algo}
 									irods.realm=test
