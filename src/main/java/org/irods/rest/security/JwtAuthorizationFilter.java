@@ -14,17 +14,12 @@ import org.irods.jargon.core.utils.Base64;
 import org.irods.rest.config.IrodsRestConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -35,19 +30,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
-@Component
-
-@PropertySources({ @PropertySource(value = "classpath:/test.dos.properties", ignoreResourceNotFound = true),
-		@PropertySource(value = "file:/etc/irods-ext/ga4gh.properties", ignoreResourceNotFound = true) })
-
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
 	private static final Logger log = LoggerFactory.getLogger(JwtAuthorizationFilter.class);
 
-	@Value("${irods.host}")
-	private String irodsHost;
-
-	@Autowired(required = true)
 	private IrodsRestConfiguration irodsRestConfiguration;
 
 	public JwtAuthorizationFilter(AuthenticationManager authenticationManager) {
@@ -106,7 +92,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
 		if (!token.isEmpty() && token.startsWith(SecurityConstants.TOKEN_PREFIX)) {
 			try {
-				log.info("host was set:{}", irodsHost);
 				log.info("have irodsRestConfiguration:{}", irodsRestConfiguration);
 				String signingKey = irodsRestConfiguration.getSharedJwtKey().trim();
 				log.debug("signingkey:-{}-", signingKey);
@@ -141,14 +126,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
 		log.warn("no auth, returning null");
 		return null;
-	}
-
-	public String getIrodsHost() {
-		return irodsHost;
-	}
-
-	public void setIrodsHost(String irodsHost) {
-		this.irodsHost = irodsHost;
 	}
 
 	public IrodsRestConfiguration getIrodsRestConfiguration() {
