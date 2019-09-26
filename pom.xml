@@ -55,21 +55,49 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+            	<exclusion>
+            		<groupId>org.slf4j</groupId>
+            		<artifactId>log4j-over-slf4j</artifactId>
+            	</exclusion>
+            	<exclusion>
+            		<groupId>ch.qos.logback</groupId>
+            		<artifactId>logback-classic</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
+            <exclusions>
+            	<exclusion>
+            		<groupId>org.slf4j</groupId>
+            		<artifactId>log4j-over-slf4j</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <!--SpringFox dependencies -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${springfox-version}</version>
+            <exclusions>
+            	<exclusion>
+            		<groupId>org.slf4j</groupId>
+            		<artifactId>log4j-over-slf4j</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${springfox-version}</version>
+            <exclusions>
+            	<exclusion>
+            		<groupId>org.slf4j</groupId>
+            		<artifactId>log4j-over-slf4j</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -86,7 +114,57 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+            	<exclusion>
+            		<groupId>org.slf4j</groupId>
+            		<artifactId>log4j-over-slf4j</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
+        
+        <dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<exclusions>
+            	<exclusion>
+            		<groupId>org.slf4j</groupId>
+            		<artifactId>log4j-over-slf4j</artifactId>
+            	</exclusion>
+            </exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<exclusions>
+            	<exclusion>
+            		<groupId>org.slf4j</groupId>
+            		<artifactId>log4j-over-slf4j</artifactId>
+            	</exclusion>
+            </exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
     </dependencies>
     <build>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -183,10 +261,10 @@
 						<phase>validate</phase>
 						<configuration>
 							<tasks>
-								<delete file="${basedir}/src/test/resources/test.dos.properties" />
-								<touch file="${basedir}/src/test/resources/test.dos.properties"
+								<delete file="${basedir}/src/test/resources/test.rest.properties" />
+								<touch file="${basedir}/src/test/resources/test.rest.properties"
 									mkdirs="true" />
-								<echo file="${basedir}/src/test/resources/test.dos.properties"
+								<echo file="${basedir}/src/test/resources/test.rest.properties"
 									append="true">
 									irods.host=${jargon.test.irods.host}
 									irods.port=${jargon.test.irods.port}
@@ -196,8 +274,11 @@
 									irods.auth.scheme=${drs.auth.scheme}
 									default.storage.resource=${jargon.test.irods.resource}
 									ssl.negotiation.policy=${drs.ssl.policy}
-									drs.rest.url.endpoint=${drs.rest.url.endpoint}
-									drs.provide.irods.urls=true
+									shared.jwt.key=${shared.jwt.key}
+									jwt.algo=${jwt.algo}
+									irods.realm=test
+									irodsext.datatyper.persist.data.types=false
+									irodsext.datatyper.detailed.determination=false
 								</echo>
 							</tasks>
 						</configuration>

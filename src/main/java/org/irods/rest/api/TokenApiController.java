@@ -3,17 +3,17 @@ package org.irods.rest.api;
 import org.springframework.stereotype.Controller;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-09-18T14:35:03.245Z[GMT]")
 @Controller
-public class FileBytesApiController implements FileBytesApi {
+public class TokenApiController implements TokenApi {
 
-    private final FileBytesApiDelegate delegate;
+    private final TokenApiDelegate delegate;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public FileBytesApiController(FileBytesApiDelegate delegate) {
+    public TokenApiController(TokenApiDelegate delegate) {
         this.delegate = delegate;
     }
 
     @Override
-    public FileBytesApiDelegate getDelegate() {
+    public TokenApiDelegate getDelegate() {
         return delegate;
     }
 }

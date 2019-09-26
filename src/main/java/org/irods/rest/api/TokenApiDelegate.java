@@ -1,6 +1,5 @@
 package org.irods.rest.api;
 
-import java.io.File;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -16,13 +15,13 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * A delegate to be called by the {@link FileBytesApiController}}.
+ * A delegate to be called by the {@link TokenApiController}}.
  * Implement this interface with a {@link org.springframework.stereotype.Service} annotated class.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-09-18T14:35:03.245Z[GMT]")
-public interface FileBytesApiDelegate {
+public interface TokenApiDelegate {
 
-    Logger log = LoggerFactory.getLogger(FileBytesApi.class);
+    Logger log = LoggerFactory.getLogger(TokenApi.class);
 
     default Optional<ObjectMapper> getObjectMapper() {
         return Optional.empty();
@@ -37,22 +36,22 @@ public interface FileBytesApiDelegate {
     }
 
     /**
-     * @see FileBytesApi#fileBytes
+     * @see TokenApi#obtainToken
      */
-    default ResponseEntity<File> fileBytes( String  path,
-         Integer  offset,
-         Integer  limit) {
+    default ResponseEntity<String> obtainToken( String  userName,
+         String  password,
+         String  authType) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("\"\"", File.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("\"\"", String.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             }
         } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default FileBytesApi interface so no example is generated");
+            log.warn("ObjectMapper or HttpServletRequest not configured in default TokenApi interface so no example is generated");
         }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
