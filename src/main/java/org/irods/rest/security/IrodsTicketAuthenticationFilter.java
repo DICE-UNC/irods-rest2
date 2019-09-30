@@ -13,7 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.irods.jargon.core.connection.IRODSAccount;
 import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
 import org.irods.rest.config.IrodsRestConfiguration;
 import org.slf4j.Logger;
@@ -72,7 +71,7 @@ public class IrodsTicketAuthenticationFilter extends BasicAuthenticationFilter {
 
 		// see if there is a ticket string...
 
-		String ticket = request.getHeader(SecurityConstants.TOKEN_HEADER);
+		String ticket = request.getHeader(SecurityConstants.TICKET_HEADER);
 		if (ticket == null || ticket.isEmpty()) {
 			log.info("no ticket, just keep going");
 			filterChain.doFilter(request, response);
@@ -102,10 +101,13 @@ public class IrodsTicketAuthenticationFilter extends BasicAuthenticationFilter {
 		List<GrantedAuthority> granted = new ArrayList<>();
 		GrantedAuthority auth = new SimpleGrantedAuthority("authToken");
 		granted.add(auth);
-		IrodsAuthentication authToken = new IrodsAuthentication(IRODSAccount.PUBLIC_USERNAME, "authToken", granted);
+		IrodsAuthentication authToken = new IrodsAuthentication("anonymous", "authToken", granted); // FIXME: add
+																									// explicit
+																									// ticket user
 		authToken.setTicket(ticket);
-		SecurityContextHolder.getContext().setAuthentication(irodsAuthentication);
-		log.info("setting auth into context:{}", irodsAuthentication);
+		SecurityContextHolder.getContext().setAuthentication(authToken);
+
+		log.info("setting auth into context:{}", authToken);
 		filterChain.doFilter(request, response);
 	}
 

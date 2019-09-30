@@ -74,7 +74,7 @@ public class RestAuthUtils {
 
 		log.info("credentials:{}", credentials);
 
-		if (credentials.length != 2) {
+		if (credentials.length < 1) {
 			throw new JargonException("user and password not in credentials");
 		}
 
@@ -101,6 +101,10 @@ public class RestAuthUtils {
 		 */
 
 		String userId = credentials[0];
+		String password = "";
+		if (credentials.length == 2) {
+			password = credentials[1];
+		}
 		if (userId.startsWith(AuthScheme.STANDARD.toString())) {
 			log.info("authScheme override to Standard");
 			authScheme = AuthScheme.STANDARD;
@@ -113,9 +117,8 @@ public class RestAuthUtils {
 
 		log.debug("userId:{}", userId);
 
-		return IRODSAccount.instance(restConfiguration.getIrodsHost(), restConfiguration.getPort(), userId,
-				credentials[1], "", restConfiguration.getIrodsZone(), restConfiguration.getIrodsDefaultResource(),
-				authScheme);
+		return IRODSAccount.instance(restConfiguration.getIrodsHost(), restConfiguration.getPort(), userId, password,
+				"", restConfiguration.getIrodsZone(), restConfiguration.getIrodsDefaultResource(), authScheme);
 
 	}
 

@@ -76,7 +76,6 @@ public class IrodsBasicAuthenticationFilter extends BasicAuthenticationFilter {
 		/*
 		 * see if authentication is done using a prior filter
 		 */
-
 		Authentication irodsAuthentication = SecurityContextHolder.getContext().getAuthentication();
 		if (irodsAuthentication != null) {
 			log.debug("authentication already done, continue");
@@ -107,6 +106,12 @@ public class IrodsBasicAuthenticationFilter extends BasicAuthenticationFilter {
 		try {
 			try {
 				irodsAccount = RestAuthUtils.getIRODSAccountFromBasicAuthValues(auth, irodsRestConfiguration);
+
+				if (irodsAccount.getUserName().equals("public")) { // FIXME: shim for testing GA4GH
+					logger.info("we do not authenticate public, this indicates using an API token");
+					return null;
+				}
+
 			} catch (IllegalArgumentException e) {
 				log.info("no basic auth creds found");
 				return null;

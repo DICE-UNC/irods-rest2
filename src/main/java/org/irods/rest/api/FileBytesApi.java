@@ -6,41 +6,40 @@
 package org.irods.rest.api;
 
 import java.io.File;
-import io.swagger.annotations.*;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import java.util.List;
-import java.util.Map;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
+
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-09-18T14:35:03.245Z[GMT]")
 @Api(value = "fileBytes", description = "the fileBytes API")
 public interface FileBytesApi {
 
-    FileBytesApiDelegate getDelegate();
-
-    @ApiOperation(value = "streams file bytes", nickname = "fileBytes", notes = "Obtains an HTTP stream of file bytes ", response = File.class, authorizations = {
-        @Authorization(value = "ApiKeyAuth"),
-@Authorization(value = "BasicAuth"),
-@Authorization(value = "BearerAuth")    }, tags={ "files", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "search results matching criteria", response = File.class),
-        @ApiResponse(code = 400, message = "bad input parameter"),
-        @ApiResponse(code = 404, message = "data not found/no access") })
-    @RequestMapping(value = "/fileBytes",
-        produces = { "application/octet-stream" }, 
-        method = RequestMethod.GET)
-    default ResponseEntity<File> fileBytes(@NotNull @ApiParam(value = "irods absolute path to the file", required = true) @Valid @RequestParam(value = "path", required = true) String path,@Min(0)@ApiParam(value = "number of bytes to skip for pagination", allowableValues = "") @Valid @RequestParam(value = "offset", required = false) Integer offset,@Min(1)@ApiParam(value = "maximum number of bytes to return", allowableValues = "") @Valid @RequestParam(value = "limit", required = false) Integer limit) {
-        return getDelegate().fileBytes(path, offset, limit);
-    }
+	@ApiOperation(value = "streams file bytes", nickname = "fileBytes", notes = "Obtains an HTTP stream of file bytes ", authorizations = {
+			@Authorization(value = "ApiKeyAuth"), @Authorization(value = "BasicAuth"),
+			@Authorization(value = "BearerAuth") }, tags = { "files", })
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "search results matching criteria", response = File.class),
+			@ApiResponse(code = 400, message = "bad input parameter"),
+			@ApiResponse(code = 404, message = "data not found/no access") })
+	@RequestMapping(value = "/fileBytes", produces = { "application/octet-stream" }, method = RequestMethod.GET)
+	default void fileBytes(
+			@NotNull @ApiParam(value = "irods absolute path to the file", required = true) @Valid @RequestParam(value = "path", required = true) String path,
+			@Min(0) @ApiParam(value = "number of bytes to skip for pagination", allowableValues = "") @Valid @RequestParam(value = "offset", required = false) Integer offset,
+			@Min(1) @ApiParam(value = "maximum number of bytes to return", allowableValues = "") @Valid @RequestParam(value = "limit", required = false) Integer limit,
+			HttpServletResponse response) {
+	}
 
 }
