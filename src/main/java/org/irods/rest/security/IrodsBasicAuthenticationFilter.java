@@ -106,11 +106,12 @@ public class IrodsBasicAuthenticationFilter extends BasicAuthenticationFilter {
 		try {
 			try {
 				irodsAccount = RestAuthUtils.getIRODSAccountFromBasicAuthValues(auth, irodsRestConfiguration);
-
-				if (irodsAccount.getUserName().equals("public")) { // FIXME: shim for testing GA4GH
-					logger.info("we do not authenticate public, this indicates using an API token");
-					return null;
-				}
+				/*
+				 * if (irodsAccount.getUserName().equals("public")) { // FIXME: shim for testing
+				 * GA4GH logger.
+				 * info("we do not authenticate public, this indicates using an API token");
+				 * return null; }
+				 */
 
 			} catch (IllegalArgumentException e) {
 				log.info("no basic auth creds found");
