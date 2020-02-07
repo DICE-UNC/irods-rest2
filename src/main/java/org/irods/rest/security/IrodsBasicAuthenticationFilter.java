@@ -117,6 +117,7 @@ public class IrodsBasicAuthenticationFilter extends BasicAuthenticationFilter {
 				log.info("no basic auth creds found");
 				return null;
 			}
+			
 			log.info("irods account for auth:{}", irodsAccount);
 
 			authResponse = irodsAccessObjectFactory.authenticateIRODSAccount(irodsAccount);

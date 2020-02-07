@@ -45,6 +45,7 @@ public class FileBytesApiController implements FileBytesApi {
 		try {
 			IRODSAccount irodsAccount = contextAccountHelper
 					.irodsAccountFromAuthentication(irodsAuthentication.getName());
+			log.info("irodsAccount:{}", irodsAccount);
 
 			if (!irodsAuthentication.getTicket().isEmpty()) {
 				// use TicketClientSupport
@@ -59,7 +60,6 @@ public class FileBytesApiController implements FileBytesApi {
 			if (!irodsFile.exists()) {
 				log.info("file does not exist");
 				throw new IrodsRestRuntimeException("file not found");
-
 			}
 
 			InputStream input = new org.irods.jargon.core.pub.io.PackingIrodsInputStream(

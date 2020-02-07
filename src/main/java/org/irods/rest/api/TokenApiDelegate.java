@@ -1,59 +1,37 @@
 package org.irods.rest.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
- * A delegate to be called by the {@link TokenApiController}}.
- * Implement this interface with a {@link org.springframework.stereotype.Service} annotated class.
+ * A delegate to be called by the {@link TokenApiController}}. Implement this
+ * interface with a {@link org.springframework.stereotype.Service} annotated
+ * class.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-09-18T14:35:03.245Z[GMT]")
 public interface TokenApiDelegate {
 
-    Logger log = LoggerFactory.getLogger(TokenApi.class);
+	Logger log = LoggerFactory.getLogger(TokenApi.class);
 
-    default Optional<ObjectMapper> getObjectMapper() {
-        return Optional.empty();
-    }
+	ObjectMapper getObjectMapper();
 
-    default Optional<HttpServletRequest> getRequest() {
-        return Optional.empty();
-    }
+	default Optional<HttpServletRequest> getRequest() {
+		return Optional.empty();
+	}
 
-    default Optional<String> getAcceptHeader() {
-        return getRequest().map(r -> r.getHeader("Accept"));
-    }
+	default Optional<String> getAcceptHeader() {
+		return getRequest().map(r -> r.getHeader("Accept"));
+	}
 
-    /**
-     * @see TokenApi#obtainToken
-     */
-    default ResponseEntity<String> obtainToken( String  userName,
-         String  password,
-         String  authType) {
-        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-            if (getAcceptHeader().get().contains("application/json")) {
-                try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("\"\"", String.class), HttpStatus.NOT_IMPLEMENTED);
-                } catch (IOException e) {
-                    log.error("Couldn't serialize response for content type application/json", e);
-                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-            }
-        } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default TokenApi interface so no example is generated");
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
+	/**
+	 * @see TokenApi#obtainToken
+	 */
+	ResponseEntity<String> obtainToken();
 }

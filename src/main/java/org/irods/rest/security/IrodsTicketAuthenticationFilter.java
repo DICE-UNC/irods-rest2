@@ -101,9 +101,9 @@ public class IrodsTicketAuthenticationFilter extends BasicAuthenticationFilter {
 		List<GrantedAuthority> granted = new ArrayList<>();
 		GrantedAuthority auth = new SimpleGrantedAuthority("authToken");
 		granted.add(auth);
-		IrodsAuthentication authToken = new IrodsAuthentication("anonymous", "authToken", granted); // FIXME: add
-																									// explicit
-																									// ticket user
+		IrodsAuthentication authToken = new IrodsAuthentication("rest2", "authToken", granted); // FIXME: add
+																								// explicit
+																								// ticket user
 		authToken.setTicket(ticket);
 		SecurityContextHolder.getContext().setAuthentication(authToken);
 

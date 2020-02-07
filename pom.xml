@@ -1,146 +1,153 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.irods</groupId>
-    <artifactId>irods-rest2</artifactId>
-    <packaging>jar</packaging>
-    <name>irods-rest2</name>
-    <version>1.0.0</version>
-    <properties>
-  		<java.version>1.8</java.version>
-  		<maven.compiler.source>${java.version}</maven.compiler.source>
-  		<maven.compiler.target>${java.version}</maven.compiler.target>
-  		<springfox-version>2.7.0</springfox-version>
-  		<jargon.version>4.3.1.0-SNAPSHOT</jargon.version>
-  		<spring.security.version>4.2.4.RELEASE</spring.security.version>
-  		<spring.boot.starter.version>1.5.9.RELEASE</spring.boot.starter.version>
-  	</properties>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.9.RELEASE</version>
-    </parent>
-    <dependencies>
-      <dependency>
-        <groupId>org.irods.jargon</groupId>
-        <artifactId>jargon-core</artifactId>
-        <version>${jargon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.irods.jargon</groupId>
-        <artifactId>jargon-mdquery</artifactId>
-        <version>${jargon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.irods.jargon</groupId>
-        <artifactId>jargon-ticket</artifactId>
-        <version>${jargon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.irods.jargon</groupId>
-        <artifactId>jargon-extensions-if</artifactId>
-        <version>${jargon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.irods.jargon</groupId>
-        <artifactId>irodsext-data-typer</artifactId>
-        <version>${jargon.version}</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-      <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-all</artifactId>
-        <version>1.10.19</version>
-        <scope>test</scope>
-      </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-            	<exclusion>
-            		<groupId>org.slf4j</groupId>
-            		<artifactId>log4j-over-slf4j</artifactId>
-            	</exclusion>
-            	<exclusion>
-            		<groupId>ch.qos.logback</groupId>
-            		<artifactId>logback-classic</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <exclusions>
-            	<exclusion>
-            		<groupId>org.slf4j</groupId>
-            		<artifactId>log4j-over-slf4j</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        <!--SpringFox dependencies -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox-version}</version>
-            <exclusions>
-            	<exclusion>
-            		<groupId>org.slf4j</groupId>
-            		<artifactId>log4j-over-slf4j</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox-version}</version>
-            <exclusions>
-            	<exclusion>
-            		<groupId>org.slf4j</groupId>
-            		<artifactId>log4j-over-slf4j</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.irods</groupId>
+	<artifactId>irods-rest2</artifactId>
+	<packaging>jar</packaging>
+	<name>irods-rest2</name>
+	<version>1.0.0</version>
+	<properties>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<springfox-version>2.7.0</springfox-version>
+		<jargon.version>4.3.2.0-SNAPSHOT</jargon.version>
+		<spring.security.version>4.2.4.RELEASE</spring.security.version>
+		<spring.boot.starter.version>1.5.9.RELEASE</spring.boot.starter.version>
+	</properties>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.9.RELEASE</version>
+	</parent>
+	<dependencies>
+		
+		<dependency>
+			<groupId>org.irods.jargon</groupId>
+			<artifactId>jargon-core</artifactId>
+			<version>${jargon.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.irods.jargon</groupId>
+			<artifactId>jargon-mdquery</artifactId>
+			<version>${jargon.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.irods.jargon</groupId>
+			<artifactId>jargon-ticket</artifactId>
+			<version>${jargon.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.irods.jargon</groupId>
+			<artifactId>jargon-extensions-if</artifactId>
+			<version>${jargon.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.irods</groupId>
+			<artifactId>irodsext-jwt-service</artifactId>
+			<version>${jargon.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.irods.jargon</groupId>
+			<artifactId>irodsext-data-typer</artifactId>
+			<version>${jargon.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!--SpringFox dependencies -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-        </dependency>
-    <!-- Bean Validation API support -->
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-            	<exclusion>
-            		<groupId>org.slf4j</groupId>
-            		<artifactId>log4j-over-slf4j</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        
-        <dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+		<!-- Bean Validation API support -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<exclusions>
-            	<exclusion>
-            		<groupId>org.slf4j</groupId>
-            		<artifactId>log4j-over-slf4j</artifactId>
-            	</exclusion>
-            </exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<exclusions>
-            	<exclusion>
-            		<groupId>org.slf4j</groupId>
-            		<artifactId>log4j-over-slf4j</artifactId>
-            	</exclusion>
-            </exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
@@ -165,8 +172,8 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
-    </dependencies>
-    <build>
+	</dependencies>
+	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
@@ -188,10 +195,13 @@
 						<phase>validate</phase>
 						<configuration>
 							<tasks>
-								<delete file="${basedir}/src/test/resources/testing.properties" />
-								<touch file="${basedir}/src/test/resources/testing.properties"
+								<delete
+									file="${basedir}/src/test/resources/testing.properties" />
+								<touch
+									file="${basedir}/src/test/resources/testing.properties"
 									mkdirs="true" />
-								<echo file="${basedir}/src/test/resources/testing.properties"
+								<echo
+									file="${basedir}/src/test/resources/testing.properties"
 									append="true">
 									test.data.directory=${jargon.test.data.directory}
 									test.irods.admin=${jargon.test.irods.admin}
@@ -247,7 +257,7 @@
 									test.option.mount.basedir=${test.option.mount.basedir}
 									test.option.python=${test.option.python}
 									ga4gh.access.url=http://foo.com/ga4gh/drs/v1/objects
-								
+
 								</echo>
 							</tasks>
 						</configuration>
@@ -261,10 +271,13 @@
 						<phase>validate</phase>
 						<configuration>
 							<tasks>
-								<delete file="${basedir}/src/test/resources/test.rest.properties" />
-								<touch file="${basedir}/src/test/resources/test.rest.properties"
+								<delete
+									file="${basedir}/src/test/resources/test.rest.properties" />
+								<touch
+									file="${basedir}/src/test/resources/test.rest.properties"
 									mkdirs="true" />
-								<echo file="${basedir}/src/test/resources/test.rest.properties"
+								<echo
+									file="${basedir}/src/test/resources/test.rest.properties"
 									append="true">
 									irods.host=${jargon.test.irods.host}
 									irods.port=${jargon.test.irods.port}
