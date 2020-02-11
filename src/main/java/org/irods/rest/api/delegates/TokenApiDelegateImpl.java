@@ -4,6 +4,8 @@
 package org.irods.rest.api.delegates;
 
 import org.irods.jargon.core.connection.IRODSAccount;
+import org.irods.jargon.core.exception.JargonException;
+import org.irods.jargon.core.exception.JargonRuntimeException;
 import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
 import org.irods.jargon.irodsext.jwt.AbstractJwtIssueService;
 import org.irods.jargon.irodsext.jwt.JwtIssueServiceImpl;
@@ -68,11 +70,12 @@ public class TokenApiDelegateImpl implements TokenApiDelegate {
 		IrodsAuthentication irodsAuthentication = (IrodsAuthentication) SecurityContextHolder.getContext()
 				.getAuthentication();
 		log.debug("authentication is: {}", irodsAuthentication);
-
-		IRODSAccount irodsAccount = contextAccountHelper.irodsAccountFromAuthentication(irodsAuthentication.getName());
-		log.info("irodsAccount:{}", irodsAccount);
+		IRODSAccount irodsAccount = null;
 
 		try {
+			irodsAccount = contextAccountHelper.irodsAccountFromAuthentication(irodsAuthentication.getName());
+			log.info("irodsAccount:{}", irodsAccount);
+
 			JwtServiceConfig jwtServiceConfig = new JwtServiceConfig();
 			jwtServiceConfig.setAlgo(irodsRestConfiguration.getJwtAlgo());
 			jwtServiceConfig.setIssuer("irods-rest2");
@@ -83,6 +86,9 @@ public class TokenApiDelegateImpl implements TokenApiDelegate {
 			String jwt = jwtIssueService.issueJwtToken(irodsAccount.getUserName());
 			return new ResponseEntity<String>(jwt, HttpStatus.OK);
 
+		} catch (JargonException e) {
+			log.error("error creating token", e);
+			throw new JargonRuntimeException("error creating token", e);
 		} finally {
 			irodsAccessObjectFactory.closeSessionAndEatExceptions();
 		}

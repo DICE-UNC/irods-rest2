@@ -72,8 +72,6 @@ public class RestAuthUtils {
 		}
 		final String[] credentials = decoded.split(":");
 
-		log.info("credentials:{}", credentials);
-
 		if (credentials.length < 1) {
 			throw new JargonException("user and password not in credentials");
 		}
@@ -137,7 +135,7 @@ public class RestAuthUtils {
 		}
 
 		return IRODSAccount.instance(restConfiguration.getIrodsHost(), restConfiguration.getPort(),
-				IRODSAccount.PUBLIC_USERNAME, "anonymous", "", restConfiguration.getIrodsZone(),
+				IRODSAccount.PUBLIC_USERNAME, "", "", restConfiguration.getIrodsZone(),
 				restConfiguration.getIrodsDefaultResource());
 	}
 

@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.irods.jargon.core.connection.IRODSAccount;
 import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
 import org.irods.rest.config.IrodsRestConfiguration;
 import org.slf4j.Logger;
@@ -101,9 +102,7 @@ public class IrodsTicketAuthenticationFilter extends BasicAuthenticationFilter {
 		List<GrantedAuthority> granted = new ArrayList<>();
 		GrantedAuthority auth = new SimpleGrantedAuthority("authToken");
 		granted.add(auth);
-		IrodsAuthentication authToken = new IrodsAuthentication("rest2", "authToken", granted); // FIXME: add
-																								// explicit
-																								// ticket user
+		IrodsAuthentication authToken = new IrodsAuthentication(IRODSAccount.PUBLIC_USERNAME, "authToken", granted);
 		authToken.setTicket(ticket);
 		SecurityContextHolder.getContext().setAuthentication(authToken);
 

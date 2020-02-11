@@ -17,6 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 public class IrodsAuthentication extends UsernamePasswordAuthenticationToken {
 
 	private static final long serialVersionUID = -3476986846389081094L;
+	private boolean anonymous = false;
 	/**
 	 * Optional {@code String} with an iRODS ticket string for this interaction
 	 */
@@ -53,6 +54,14 @@ public class IrodsAuthentication extends UsernamePasswordAuthenticationToken {
 		StringBuilder builder = new StringBuilder();
 		builder.append("IrodsAuthentication [ticket=").append(ticket).append("]");
 		return builder.toString();
+	}
+
+	public boolean isAnonymous() {
+		return anonymous;
+	}
+
+	public void setAnonymous(boolean anonymous) {
+		this.anonymous = anonymous;
 	}
 
 }

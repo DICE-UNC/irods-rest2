@@ -10,6 +10,6 @@ ENTRYPOINT ["/runit.sh"]
 
 
 
-# build: docker build -t michael-conway/irods-rest2:1.0.0 .
+# build: docker build -t michaelconway/irods-rest2:1.0.0 .
 
-# run:  docker run -d --rm -p 8080:8080 -v /etc/irods-ext:/etc/irods-ext   michael-conway/irods-rest2:1.0.0
+# run:  docker run -d --rm -p 8080:8080 -v /etc/irods-ext:/etc/irods-ext   michaelconway/irods-rest2:1.0.0
