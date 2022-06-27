@@ -1,8 +1,8 @@
 ## Docker instructions
 
-A Docker image is now available for testing and use.  The image is built using the Dockerfile included in this project.  The image has been pushed to dockerhub and is available at diceunc/rest:gittagversion.  The gittagversion maps to the current release version in the README.md, for example
+A Docker image is now available for testing and use.  The image is built using the Dockerfile included in this project.  The image has been pushed to dockerhub and is available at michaelconway/rest:gittagversion.  The gittagversion maps to the current release version in the README.md, for example
 
-diceunc/metadata-template:4.2.1.0
+michaelconway/irods-rest2:1.0.1
 
 Dockerhub can be consulted for available tags.  The location may eventually change, and this will be noted in later releases.
 
@@ -10,7 +10,7 @@ The image from dockerhub can be configured when it is run in the following manne
 
 ```
 
-docker run -d --rm -p hostport:8080 -v /etc/irods-ext:/etc/irods-ext  -v /some/dir/webdavcert:/tmp/cert --add-host example.coml:192.168.1.1 diceunc/metadata-template:4.2.1.0
+docker run -d --rm -p hostport:8080 -v /etc/irods-ext:/etc/irods-ext  -v /some/dir/webdavcert:/tmp/cert --add-host example.coml:192.168.1.1 michaelconway/irods-rest2:1.0.1
 
 
 ```
