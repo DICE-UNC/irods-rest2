@@ -10,5 +10,5 @@ else
 fi
 
 echo "running app"
-java -jar /irods-rest2-1.0.0.jar
+java -jar /irods-rest2-1.0.1.jar
 
