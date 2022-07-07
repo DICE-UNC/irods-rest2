@@ -1,0 +1,263 @@
+---
+swagger: "2.0"
+info:
+  description: This is the iRODS REST API
+  version: 1.0.0
+  title: iRODS REST API
+  contact:
+    email: info@irods.org
+  license:
+    name: BSD 3-Clause
+    url: https://opensource.org/licenses/BSD-3-Clause
+host: virtserver.swaggerhub.com
+basePath: /irods-rest/1.0.0
+tags:
+- name: auth
+  description: authentication endpoint
+- name: query
+  description: general query endpoint
+- name: rodsadmin
+  description: Secured Admin-only calls
+- name: rodsuser
+  description: Operations available to regular users
+schemes:
+- https
+security:
+- BearerAuth:
+  - read
+  - write
+- BasicAuth:
+  - read
+  - write
+- ApiKeyAuth: []
+paths:
+  /access:
+    post:
+      tags:
+      - access
+      summary: obtain an access token and url for a given object
+      description: |
+        obtain an access token and url for a given object
+      operationId: access
+      parameters:
+      - name: path
+        in: query
+        description: irods absolute logical path of the object
+        required: true
+        type: string
+      security: []
+      responses:
+        "200":
+          description: token acquired
+        "401":
+          description: token acquisition failed
+  /token:
+    post:
+      tags:
+      - auth
+      summary: obtain an encoded jwt for access
+      description: |
+        Obtain a JWT token for accessing REST endpoints
+      operationId: obtain_token
+      parameters: []
+      security: []
+      responses:
+        "200":
+          description: Successfully authenticated
+        "401":
+          description: Authorization failed
+  /list:
+    get:
+      tags:
+      - list
+      summary: Recursively list the contents of a logical collection
+      description: |
+        Recursively list the contents of a logical collection
+      operationId: list
+      parameters:
+      - name: path
+        in: query
+        description: irods absolute logical path of the collection
+        required: true
+        type: string
+      - name: stat
+        in: query
+        description: flag to include status information
+        required: false
+        type: boolean
+      - name: permissions
+        in: query
+        description: flag to include permission information
+        required: false
+        type: boolean
+      - name: metadata
+        in: query
+        description: flag to include metadata information
+        required: false
+        type: boolean
+      - name: offset
+        in: query
+        description: number of records to skip for pagination
+        required: false
+        type: integer
+        minimum: 0
+        format: int32
+      - name: limit
+        in: query
+        description: maximum number of records to return
+        required: false
+        type: integer
+        minimum: 1
+        format: int32
+      security:
+      - BasicAuth:
+        - read
+      - ApiKeyAuth:
+        - read
+      - BearerAuth:
+        - read
+      responses:
+        "200":
+          description: bytestream of a requested data thinger
+        "400":
+          description: bad input parameter
+        "404":
+          description: data not found/no access
+  /stream:
+    get:
+      tags:
+      - stream_get
+      summary: streams bytes to/from a data thinger
+      description: |
+        Obtains an HTTP stream of file bytes
+      operationId: stream
+      parameters:
+      - name: path
+        in: query
+        description: irods absolute logical path to the file
+        required: true
+        type: string
+      - name: offset
+        in: query
+        description: number of bytes to skip for pagination
+        required: false
+        type: integer
+        minimum: 0
+        format: int32
+      - name: limit
+        in: query
+        description: maximum number of bytes to return
+        required: false
+        type: integer
+        minimum: 1
+        format: int32
+      security:
+      - BasicAuth:
+        - read
+      - ApiKeyAuth:
+        - read
+      - BearerAuth:
+        - read
+      responses:
+        "200":
+          description: bytestream of a requested data thinger
+        "400":
+          description: bad input parameter
+        "404":
+          description: data not found/no access
+    put:
+      tags:
+      - stream_put
+      summary: streams bytes to/from a data thinger
+      description: |
+        Sends an HTTP stream of file bytes
+      operationId: stream
+      parameters:
+      - name: path
+        in: query
+        description: irods absolute logical path to the file
+        required: true
+        type: string
+      - name: offset
+        in: query
+        description: number of bytes to skip for pagination
+        required: false
+        type: integer
+        minimum: 0
+        format: int32
+      - name: limit
+        in: query
+        description: maximum number of bytes to return
+        required: false
+        type: integer
+        minimum: 1
+        format: int32
+      security:
+      - BasicAuth:
+        - read
+      - ApiKeyAuth:
+        - read
+      - BearerAuth:
+        - read
+      responses:
+        "200":
+          description: bytestream of a requested data thinger
+        "400":
+          description: bad input parameter
+        "404":
+          description: data not found/no access
+  /query:
+    get:
+      tags:
+      - query
+      summary: searches iRODS Catalog using the General Query Language
+      description: |
+        By passing in the appropriate options, you can search for
+        anything within the iRODS Catalog
+      operationId: catalogQuery
+      produces:
+      - application/json
+      parameters:
+      - name: query_string
+        in: query
+        description: pass a query string using the general query language or a query type
+        required: true
+        type: string
+      - name: query_limit
+        in: query
+        description: maximum number of records to return
+        required: false
+        type: integer
+        maximum: 50
+        minimum: 0
+        format: string
+      - name: row_offset
+        in: query
+        description: number of records to skip for pagination
+        required: false
+        type: integer
+        minimum: 0
+        format: string
+      - name: query_type
+        in: query
+        description: string description of the query type "general" or "specific"
+        required: true
+        type: string
+      responses:
+        "200":
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/query_results'
+        "400":
+          description: bad input parameter
+definitions:
+  query_results:
+    type: object
+    required:
+    - results
+    properties:
+      results:
+        type: string
+        example: ""
